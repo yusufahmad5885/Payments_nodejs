@@ -27,4 +27,14 @@ app.get("/store", function (req, res) {
   });
 });
 
+app.post("/purchase", function (req, res) {
+  fs.readFile("items.json", function (error, data) {
+    if (error) {
+      res.status(500).end();
+    } else {
+      console.log("purchase");
+    }
+  });
+});
+
 app.listen(3000);

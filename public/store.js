@@ -41,7 +41,24 @@ var stripeHandler = StripeCheckout.configure({
         "cart-quantity-input"
       )[0];
       var quantity = quantityElement.value;
+      var id = cartRow.dataset.itemId;
+      items.push({
+        id: id,
+        quantity: quantity,
+      });
     }
+
+    fetch("/purchase", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify({
+        stripeTokenId: token.id,
+        items: items,
+      }),
+    });
   },
 });
 
